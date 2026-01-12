@@ -32,7 +32,7 @@ jobs:
     permissions:
       contents: read
       packages: write
-    runs-on: ubuntu-24.04-ppc64le
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         asset:
@@ -42,6 +42,7 @@ jobs:
           - virtiofsd
         stage:
           - ${{ inputs.stage }}
+        os: [ kata-uss3b, ubuntu-24.04-ppc64le ]
     steps:
       - name: Login to Kata Containers quay.io
         if: ${{ inputs.push-to-registry == 'yes' }}
@@ -89,7 +90,7 @@ jobs:
 
   build-asset-rootfs:
     name: build-asset-rootfs
-    runs-on: ubuntu-24.04-ppc64le
+    runs-on: ${{ matrix.os }}
     needs: build-asset
     permissions:
       contents: read
@@ -170,7 +171,7 @@ jobs:
 
   build-asset-shim-v2:
     name: build-asset-shim-v2
-    runs-on: ubuntu-24.04-ppc64le
+    runs-on: ${{ matrix.os }}
     needs: [build-asset, build-asset-rootfs, remove-rootfs-binary-artifacts]
     permissions:
       contents: read
@@ -230,7 +231,7 @@ jobs:
 
   create-kata-tarball:
     name: create-kata-tarball
-    runs-on: ubuntu-24.04-ppc64le
+    runs-on: ${{ matrix.os }}
     needs: [build-asset, build-asset-rootfs, build-asset-shim-v2]
     permissions:
       contents: read
