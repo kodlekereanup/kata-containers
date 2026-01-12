@@ -36,9 +36,9 @@ jobs:
     strategy:
       matrix:
         asset:
-          - agent
-          - kernel
-          - qemu
+          # - agent
+          # - kernel
+          # - qemu
           - virtiofsd
         stage:
           - ${{ inputs.stage }}
