@@ -42,7 +42,7 @@ jobs:
           - virtiofsd
         stage:
           - ${{ inputs.stage }}
-        os: [ kata-uss3b, ubuntu-24.04-ppc64le ]
+        os: [ kata-uss3b ]
     steps:
       - name: Login to Kata Containers quay.io
         if: ${{ inputs.push-to-registry == 'yes' }}
